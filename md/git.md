@@ -10,7 +10,7 @@ git的存储结构如下图所示，每次提交（commit或merge）都会在提
 
 git合并分为快速合并（fast-forward merge）和三方合并(three-way merge)；下图master合并hotfix会执行快速合并，master由c2移动到c4即可，hotfix合并iss53则需要执行三方合并，c3、c4的共同最近祖先c2作为base版本，根据文件在c3、c4的变化情况执行合并（具体合并策略下表）
 
-![](C:\mdnotes\image\2025-04-09-17-18-39-image.png)
+![](assets/2025-04-09-17-37-43-image.png)
 
 | Base版本 | Our版本 | Their版本 | 处理方式         |
 | ------ | ----- | ------- | ------------ |
