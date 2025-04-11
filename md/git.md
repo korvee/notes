@@ -1,8 +1,10 @@
 # 介绍
 
-GIT是分布式版本管理工具，分布式体现在每个开发者的本地仓库都包含完整的版本库内容，相当于一个独立的备份；GIT分为本地和远程仓库，本地仓库又分为工作区、暂存区和版本库
+GIT是分布式版本管理工具，分布式体现在每个开发者的本地仓库都包含完整的版本库内容（仓库文件和变更历史），相当于一个独立的备份；GIT分为分为工作区、暂存区和版本库，协作开发模式下还会有一个远程仓库
 
-git的存储结构如下图所示，每次提交（commit或merge）都会在提交树上生成一个新的节点，节点指向一个目录树，目录树包含了该版本所有文件的目录以及文件目录对应的blob引用（文件内容是单独存储的，目录树只包含引用，所以很小，并且未修改的文件blob相同，多个版本会复用一个blob，但如果修改了文件内容，就会生成一个新的完整的blob，所以git不适合存储频繁修改的大文件）；而分支只是提交树上某个节点的commitid，所以git的分支是相当轻量的；
+GIT的存储结构如下图所示，每次提交（commit或merge）都会在提交树上生成一个新的节点（也就是一个版本），节点指向一个目录树，目录树包含了该版本所有文件的目录以及文件对应的blob引用（实际文件被压缩为blob，blob计算sha-1哈希值作为该文件的引用，这样既保证了引用的唯一性，也可以防止文件被篡改）
+
+GIT每次提交或者merge会在目录树中新增一个提交节点，提交节点只包含的提交人、提交时间、commitid等字段信息，所以GIT提交是轻量的；GIT的分支就只是一个commitid，代表分支当前版本，所以GIT的分支也是轻量的；提交和新建分支的操作都很轻量，GIT是鼓励频繁提交和多建分支的
 
 ![](assets/2025-04-09-17-42-13-image.png)
 
@@ -19,7 +21,6 @@ git合并分为快速合并（fast-forward merge）和三方合并(three-way mer
 | A      | B     | C       | 尝试自动合并       |
 | A      | B     | B       | 自动采用 B       |
 | A      | B     | 删除      | 冲突（修改 vs 删除） |
-| 新增     | 修改    | 修改      | 按新增文件处理      |
 
 # 常用命令
 
@@ -40,6 +41,8 @@ git合并分为快速合并（fast-forward merge）和三方合并(three-way mer
    2. git branch branch-name 新建分支
    
    3. git branch -d branch-name 删除分支
+   
+   4. git branch -a查询远程分支origin/branchname，然后使用git checkout branchname即创建本地分支branchname，它会自动映射到origin/branchname
 
 5. git status 查询工作目录和暂存区的当前状态。会显示新增未add的文件（untracked file），修改未add文件（not staged for commit），add未commit的文件（changes to be commited）
 
