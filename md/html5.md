@@ -84,7 +84,7 @@ float原本用于设置文字环绕图片，后面也被用于页面布局，在
 
 # 其他
 
-### position
+## position
 
 1. 默认值为static即静态定位，元素位于正常文档流，top/bottom/left/right/z-index属性失效
 
